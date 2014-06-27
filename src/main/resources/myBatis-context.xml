@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+  xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+    "
+  >
+
+  <!-- Oracle фабрика сессий для MyBatis -->
+  <bean id="oracleSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <property name="dataSource" ref="oracleThinDataSource"/>
+    <property name="typeAliasesPackage" value="foo.bar.mapper.mybatis"/>
+  </bean>
+
+  <!-- Сканируется мапперы и производится автоматическое связывание их (Oracle) -->
+  <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+    <property name="basePackage" value="foo.bar.mapper"/>
+    <property name="sqlSessionFactoryBeanName" value="oracleSessionFactory"/>
+  </bean>
+</beans>

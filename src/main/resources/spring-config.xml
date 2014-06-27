@@ -5,4 +5,19 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
     <context:annotation-config />
     <context:component-scan base-package="foo.bar"/>
+
+
+  <context:property-placeholder location="file:./connection.properties"/>
+
+  <bean id="oracleThinDataSource" class="oracle.jdbc.pool.OracleDataSource">
+    <property name="URL"      value="${oracle.url}"/>
+    <property name="user"     value="${oracle.user}"/>
+    <property name="password" value="${oracle.password}"/>
+  </bean>
+
+  <!-- Подключаем myBatis-->
+  <import resource="myBatis-context.xml"/>
+
+
+
 </beans>

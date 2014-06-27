@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="foo.bar.mapper.HelloMaper">
+
+  <!-- Список пользователей и их измененных атрибутов. -->
+  <select id="getSome" resultType="string">
+    select t.parameter || ' = ' || t.value from nls_session_parameters t
+  </select>
+
+</mapper>
