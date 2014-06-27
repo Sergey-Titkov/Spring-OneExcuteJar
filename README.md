@@ -1,0 +1,1 @@
+"c:\Program Files\Java\jdk1.7.0_25\bin\java.exe" -jar SpringOneExecuteJar.one-jar.jar
