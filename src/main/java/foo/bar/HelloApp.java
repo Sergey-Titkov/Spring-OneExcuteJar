@@ -33,10 +33,15 @@ public class HelloApp {
       return;
     }
 
+
+
+    //lc.
+    //logger.a
+      //log4j.appender.ConsoleAppender.encoding = Cp866
     // Проверям что все работает.
     System.out.println("Прямой вывод!");
     // Проверям, что библиотека логирования подключилась.
-    logger.info("Hello world from logger.");
+    logger.info("Выводим через логер.");
 
     // Проверяем, что контекст спринга работает.
     ApplicationContext context = new ClassPathXmlApplicationContext("spring-config.xml");
@@ -47,7 +52,7 @@ public class HelloApp {
     HelloMaper helloMaper = context.getBean(HelloMaper.class);
     List<String> result = new ArrayList<>(1);
     result = helloMaper.getSome();
-    System.out.println("Что получили из Оракла");
+    System.out.println("Получаем данные из Оракла");
     for (String item : result) {
       System.out.println(item);
     }

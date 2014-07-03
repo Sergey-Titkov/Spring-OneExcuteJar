@@ -15,6 +15,6 @@ public class SpringAppTests {
 
     @Test
     public void testSayHello() {
-        Assert.assertEquals("Hello world!", helloService.sayHello());
+        Assert.assertEquals("Эта строка получена из бина. Проверяем корректность работы автосвязывания спринга.", helloService.sayHello());
     }
 }
