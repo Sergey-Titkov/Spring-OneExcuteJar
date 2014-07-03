@@ -31,20 +31,20 @@
 
 Важно! Для получения исполняемого jar необходимо подключить maven-jar-plugin артефакт.
 Важно! Для нормальной работы примера необходимо подключение к Ораклу. Для этого в папке откуда производится запуск программы, в случае с запуском jar это папка target, необходимо создать файл connection.properties со следующим содержанием:
-
+```
 oracle.url=jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=<хост БД>)(PORT=<порт>)))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=<имя базы>)))
-
 oracle.user=<логин>
-
 oracle.password=<пароль>
-
+```
 Да, да его нет в репозитарии!
 
-Собираем проект мавеном: mvn -DconsoleEncoding=<Кодировка консоли. Для windows 866, для nix обычно UTF8> package
+Собираем проект мавеном: `mvn -DconsoleEncoding=<Кодировка консоли. Для windows 866, для nix обычно UTF8> package
+
 В директории \target должны создастся два файла: SpringOneExecuteJar.jar, SpringOneExecuteJar.one-jar.jar 
 Нам нужен второй. Проверим работоспособность. 
 java.exe -DconsoleEncoding=<Кодировка консоли> -jar SpringOneExecuteJar.one-jar.jar
 Получаем в консоли:
+```
 JarClassLoader: Warning: org/apache/commons/logging/impl/NoOpLog.class in lib/jcl-over-slf4j-1.6.6.jar is hidden by lib/commons-logging-1.1.1.jar (with different bytecode)
 JarClassLoader: Warning: org/apache/commons/logging/impl/SimpleLog$1.class in lib/jcl-over-slf4j-1.6.6.jar is hidden by lib/commons-logging-1.1.1.jar (with different bytecode)
 JarClassLoader: Warning: org/apache/commons/logging/impl/SimpleLog.class in lib/jcl-over-slf4j-1.6.6.jar is hidden by lib/commons-logging-1.1.1.jar (with different bytecode)
@@ -78,14 +78,17 @@ NLS_TIMESTAMP_TZ_FORMAT = DD.MM.RR HH24:MI:SSXFF TZR
 NLS_DUAL_CURRENCY = р.
 NLS_COMP = BINARY
 NLS_LENGTH_SEMANTICS = BYTE
+```
 
 Как видим, все работает, примерно, как задумано. Но при загрузке данных из jar выдается предупреждения:
+```
 JarClassLoader: Warning: org/apache/commons/logging/impl/NoOpLog.class in lib/jcl-over-slf4j-1.6.6.jar is hidden by lib/commons-logging-1.1.1.jar (with different bytecode)
 JarClassLoader: Warning: org/apache/commons/logging/impl/SimpleLog$1.class in lib/jcl-over-slf4j-1.6.6.jar is hidden by lib/commons-logging-1.1.1.jar (with different bytecode)
 JarClassLoader: Warning: org/apache/commons/logging/impl/SimpleLog.class in lib/jcl-over-slf4j-1.6.6.jar is hidden by lib/commons-logging-1.1.1.jar (with different bytecode)
 JarClassLoader: Warning: org/apache/commons/logging/Log.class in lib/jcl-over-slf4j-1.6.6.jar is hidden by lib/commons-logging-1.1.1.jar (with different bytecode)
 JarClassLoader: Warning: org/apache/commons/logging/LogConfigurationException.class in lib/jcl-over-slf4j-1.6.6.jar is hidden by lib/commons-logging-1.1.1.jar (with different bytecode)
 JarClassLoader: Warning: org/apache/commons/logging/LogFactory.class in lib/jcl-over-slf4j-1.6.6.jar is hidden by lib/commons-logging-1.1.1.jar (with different bytecode)
+```
 Это происходит потому что, артефакт one-jar добавляет внутрь сформированного jar библиотеку commons-logging-1.1.1.jar, а мы используем в нашем проекте используем библиотеку slf4j, библиотека commons-logging входить в библиотеку  slf4j. Для того что бы избавиться от предупреждения, надо удалить библиотеку  commons-logging-1.1.1.jar из каталога lib в jar файла. Работоспособность от этого ни как не пострадает. Удаляем, запускаем, убеждаемся, что никаких предупреждений нет.
 Описание работы one-jar дано в этой статье: http://www.ibm.com/developerworks/ru/library/j-onejar/
 
