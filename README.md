@@ -38,11 +38,12 @@ oracle.password=<пароль>
 ```
 Да, да его нет в репозитарии!
 
-Собираем проект мавеном: `mvn -DconsoleEncoding=<Кодировка консоли. Для windows 866, для nix обычно UTF8> package
+Собираем проект мавеном: `mvn -DconsoleEncoding=<Кодировка консоли. Для windows 866, для nix обычно UTF8> package`
 
 В директории \target должны создастся два файла: SpringOneExecuteJar.jar, SpringOneExecuteJar.one-jar.jar 
-Нам нужен второй. Проверим работоспособность. 
-java.exe -DconsoleEncoding=<Кодировка консоли> -jar SpringOneExecuteJar.one-jar.jar
+Нам нужен второй. Проверим работоспособность: 
+`java.exe -DconsoleEncoding=<Кодировка консоли> -jar SpringOneExecuteJar.one-jar.jar`
+
 Получаем в консоли:
 ```
 JarClassLoader: Warning: org/apache/commons/logging/impl/NoOpLog.class in lib/jcl-over-slf4j-1.6.6.jar is hidden by lib/commons-logging-1.1.1.jar (with different bytecode)
@@ -89,47 +90,10 @@ JarClassLoader: Warning: org/apache/commons/logging/Log.class in lib/jcl-over-sl
 JarClassLoader: Warning: org/apache/commons/logging/LogConfigurationException.class in lib/jcl-over-slf4j-1.6.6.jar is hidden by lib/commons-logging-1.1.1.jar (with different bytecode)
 JarClassLoader: Warning: org/apache/commons/logging/LogFactory.class in lib/jcl-over-slf4j-1.6.6.jar is hidden by lib/commons-logging-1.1.1.jar (with different bytecode)
 ```
-Это происходит потому что, артефакт one-jar добавляет внутрь сформированного jar библиотеку commons-logging-1.1.1.jar, а мы используем в нашем проекте используем библиотеку slf4j, библиотека commons-logging входить в библиотеку  slf4j. Для того что бы избавиться от предупреждения, надо удалить библиотеку  commons-logging-1.1.1.jar из каталога lib в jar файла. Работоспособность от этого ни как не пострадает. Удаляем, запускаем, убеждаемся, что никаких предупреждений нет.
+Это происходит потому что, артефакт one-jar добавляет внутрь сформированного jar библиотеку commons-logging-1.1.1.jar, а мы используем в нашем проекте используем библиотеку slf4j, библиотека commons-logging входить в библиотеку  slf4j.
+
+Для того что бы избавиться от предупреждения, надо удалить библиотеку  commons-logging-1.1.1.jar из каталога lib в jar файла. Работоспособность от этого ни как не пострадает. Удаляем, запускаем, убеждаемся, что никаких предупреждений нет.
+
 Описание работы one-jar дано в этой статье: http://www.ibm.com/developerworks/ru/library/j-onejar/
 
 
-#Создание запускаемого jar файла со всеми необходимыми библиотеками
-В это
-
-# (GitHub-Flavored) Markdown Editor
-
-Basic useful feature list:
-
- * Ctrl/Cmd + S to save the file
- * Drag and drop a file into here to load it
- * File contents are saved in the URL so you can share files
-
-
-I'm no good at writing sample / filler text, so go write something yourself.
-
-Look, a list!
-
- * foo
- * bar
- * baz
-
-And here's some code!
-
-```javascript
-$(function(){
-  $('div').html('I am a div.');
-});
-```
-
-This is [on GitHub](https://github.com/jbt/markdown-editor) so let me know if I've b0rked it somewhere.
-
-
-Props to Mr. Doob and his [code editor](http://mrdoob.com/projects/code-editor/), from which
-the inspiration to this, and some handy implementation hints, came.
-
-### Stuff used to make this:
-
- * [marked](https://github.com/chjj) for Markdown parsing
- * [CodeMirror](http://codemirror.net/) for the awesome syntax-highlighted editor
- * [highlight.js](http://softwaremaniacs.org/soft/highlight/en/) for syntax highlighting in output code blocks
- * [js-deflate](https://github.com/dankogai/js-deflate) for gzipping of data to make it fit in URLs
