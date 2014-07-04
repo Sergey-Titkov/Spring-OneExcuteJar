@@ -94,6 +94,6 @@ JarClassLoader: Warning: org/apache/commons/logging/LogFactory.class in lib/jcl-
 
 Для того что бы избавиться от предупреждения, надо удалить библиотеку  commons-logging-1.1.1.jar из каталога lib в jar файла. Работоспособность от этого ни как не пострадает. Удаляем, запускаем, убеждаемся, что никаких предупреждений нет.
 
-Описание работы one-jar дано в этой статье: http://www.ibm.com/developerworks/ru/library/j-onejar/
+Описание работы one-jar дано в этой статье: http://www.ibm.com/developerworks/ru/library/j-onejar/ 
 
 
